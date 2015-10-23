@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FrontGraph</title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" max-age="0" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <canvas id = 'canvas' width = '500px' height='500px'></canvas>
+    <script type="text/javascript" src="/js/common/complex.js"></script>
+    <script type="text/javascript">
+        function paint(ZSet, ctx, x) {
+            var color;
+            var mod, x, c1, c2, c3;
+            var l = ZSet.length;
+            var n = Math.sqrt(l);
+            var imageData = ctx.getImageData(0, 0, n, n);
+            var data = imageData.data;
+            for (var i = 0; i < n; i++) {
+                for (var j = 0; j < n; j++) {
+                    color = [55, 0, 0];
+                    mod = ZSet[i*n+j] * (200 / x);
+                    color[1] += mod*1.2;
+                    color[0] += mod*1.5;
+                    color[2] += mod*1.2;
+                    data[(i*n+j)*4] = color[0] > 255 ? 255 : color[0];
+                    data[(i*n+j)*4+1] = color[1] > 255 ? 255 : color[1];
+                    data[(i*n+j)*4+2] = color[2] > 255 ? 255 : color[2];
+                    data[(i*n+j)*4+3] = 255;
+                }
+            }
+            return imageData;
+        };
+
+        function paint1(ZSet, ctx, x) {
+            var color;
+            var mod, x, c1, c2, c3;
+            var l = ZSet.length;
+            var n = Math.sqrt(l);
+            var imageData = ctx.getImageData(0, 0, n, n);
+            var data = imageData.data;
+            for (var i = 0; i < n; i++) {
+                for (var j = 0; j < n; j++) {
+                    color = [55, 0, 55];
+                    mod = ZSet[i*n+j] * (200 / x);
+                    color[1] += mod;
+                    color[0] += mod;
+                    color[2] += mod;
+                    data[(i*n+j)*4] = color[0] > 255 ? 255 : color[0];
+                    data[(i*n+j)*4+1] = color[1] > 255 ? 255 : color[1];
+                    data[(i*n+j)*4+2] = color[2] > 255 ? 255 : color[2];
+                    data[(i*n+j)*4+3] = 255;
+                }
+            }
+            return imageData;
+        };
+
+        var url = window.location.href;
+        var instrucs = url.split('?');
+        var ins = [];
+        ins = instrucs[1].split('&');
+        if (ins[0] === 'julia') {
+            var set = new Complex().julia(250, +ins[1], [+ins[2], +ins[3]], ins[4]);
+            var canvas = document.getElementById('canvas');
+            canvas.style['backgroundColor'] = '#000';
+            var ctx = canvas.getContext('2d');
+            document.body.appendChild(canvas);
+            var imageData = paint(set, ctx, ins[4]);
+            ctx.putImageData(imageData, 0, 0);
+        }
+        else if (ins[0] === 'mandelbrot') {
+            var set = new Complex().mandelbrot(250, +ins[1], [+ins[2], +ins[3]], ins[4]);
+            var canvas = document.getElementById('canvas');
+            canvas.style['backgroundColor'] = '#000';
+            var ctx = canvas.getContext('2d');
+            document.body.appendChild(canvas);
+            var imageData = paint1(set, ctx, ins[4]);
+            ctx.putImageData(imageData, 0, 0);
+        }
+    </script>
+</body>
+</html>
