@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>FrontGraph</title>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" max-age="0" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <canvas id="graph"></canvas>
+    <script type="text/javascript" src="/js/common/codo.js"></script>
+    <script type="text/javascript">
+        var codo = new CODO({
+        });
+        var url = window.location.href;
+        var instrucs = url.split('?');
+        var ins = [];
+        for (var i = 1; i < instrucs.length; i++) {
+            ins = instrucs[i].split('&');
+            if (ins[0] in codo) {
+                switch (ins.length) {
+                    case 1:
+                        codo[ins[0]](1);
+                        break;
+                    case 2:
+                        codo[ins[0]](ins[1]);
+                        break;
+                    case 3:
+                        codo[ins[0]](ins[1], ins[2]);
+                        break;
+                    case 4:
+                        codo[ins[0]](ins[1], ins[2], ins[3]);
+                        break;
+                    default:
+                        codo[ins[0]](ins[1], ins[2], ins[3], ins[4]);
+                        break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
