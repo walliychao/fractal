@@ -1,5 +1,4 @@
-# fractal
-js realizations about fractal 
+# fractal - js realizations
 
 include **reciprocal**, **IFS** methods and **Mandelbrot Set** & **Julia Set** relizations. 
 
