@@ -16,10 +16,14 @@ linear iterated points, so it's better set 'iter' around 100,000
 
 pixels 500 means a 500 * 500 square, and iterate 500 * 500 points for 'iter' times
 
-so it's better set 'iter' around 30; set 'size' around 1 and others around 0  
+so it's better set 'iter' around 30; set 'size' around 1 and others around 0 
 
-![JuliaSet.png]
+Julia Set
 
-![MandelbrotSet.png]
+![JuliaSet](./JuliaSet.png)
+
+Mandelbrot Set
+
+![MandelbrotSet](./MandelbrotSet.png)
 
 
